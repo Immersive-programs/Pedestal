@@ -6,7 +6,7 @@
 
 ## Stand for things with backlight and rotation
 
-Video on YouTube: soon
+Video on YouTube: https://youtu.be/cd8HgQr4loQ
 
 ### Features:
 - Different operating modes;<details>
@@ -98,7 +98,7 @@ Video on YouTube: soon
 
 ## Подставка под вещи с подсветкой и вращением.
 
-Ролик на YouTube: soon
+Ролик на YouTube: https://youtu.be/cd8HgQr4loQ
 
 ### Особенности:
 - Разные режимы работы;<details>
