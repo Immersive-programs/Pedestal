@@ -87,7 +87,7 @@ Video on YouTube: https://youtu.be/cd8HgQr4loQ
 
 ### Creators:
 - Author of the idea: Nikita;
-- Author of the design and code: Denis.
+- Author of the code: Denis.
 </details>
 
 </details>
@@ -177,5 +177,5 @@ Video on YouTube: https://youtu.be/cd8HgQr4loQ
 
  ### Создатели:
  - Автор идеи: Никита;
- - Автор дизайна и кода: Денис.
+ - Автор кода: Денис.
 </details>
