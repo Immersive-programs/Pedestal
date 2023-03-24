@@ -1,0 +1,17 @@
+<style scoped>
+.op {
+    display: block;
+    list-style-type: none;
+    list-style: none;
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 2px;
+    border: 2px solid gray;
+    border-radius: 10px
+}
+.op li{text-align: center;}
+</style>
+<ul class = "op">
+    <li>Only Random!
+</ul>

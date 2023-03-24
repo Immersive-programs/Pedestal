@@ -1,0 +1,89 @@
+<style scoped onload="hex.value=rgbToHex(parseInt(!r_c),parseInt(!g_c),parseInt(!b_c));">
+.op {
+    display: block;
+    list-style-type: none;
+    list-style: none;
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 2px;
+    border: 2px solid gray;
+    border-radius: 10px
+}
+.op li{text-align: center;}
+#ri, #gi, #bi{width:30px;}
+#r, #g, #b{width:50%;}
+#hex ,#ledrange {width:30%;}
+</style>
+<ul class = "op">
+    <li>Color:</li>
+    <li>R:
+        <input type="range" id='r'
+        oninput="ri.value = this.value;"
+        ontouchend="{datasend('monocolor', r.value+','+g.value+','+b.value);
+                     hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value))
+                     ri.value = this.value;}"
+        onMouseUp="{datasend('monocolor', r.value+','+g.value+','+b.value);
+                    hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value))
+                    ri.value = this.value;}"
+        min="0" max="255" step="1" value="!r_c">
+        <input id='ri' value="!r_c" onkeyup="{
+        this.value = this.value.replace(/[^\d]/g,'')
+        if (parseInt(this.value) > -1 && parseInt(this.value) < 256)
+            r.value = this.value;
+            hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value));
+            datasend('monocolor', r.value+','+g.value+','+b.value);}"/>
+    </li>
+    <li>G:
+        <input type="range" id='g'
+        oninput="gi.value = this.value;"
+        ontouchend="{datasend('monocolor', r.value+','+g.value+','+b.value);
+                     hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value))
+                     gi.value = this.value;}"
+        onMouseUp="{datasend('monocolor', r.value+','+g.value+','+b.value);
+                    hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value))
+                    gi.value = this.value;}"
+        min="0" max="255" step="1" value="!g_c">
+        <input id='gi' value="!g_c" onkeyup="{
+        this.value = this.value.replace(/[^\d]/g,'')
+        if (parseInt(this.value) > -1 && parseInt(this.value) < 256)
+            g.value = this.value;
+            hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value));
+            datasend('monocolor', r.value+','+g.value+','+b.value);}"/>
+    </li>
+    <li>B:
+        <input type="range" id='b'
+        oninput="bi.value = this.value;"
+        ontouchend="{datasend('monocolor', r.value+','+g.value+','+b.value);
+                     hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value))
+                     bi.value = this.value;}"
+        onMouseUp="{datasend('monocolor', r.value+','+g.value+','+b.value);
+                    hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value))
+                    bi.value = this.value;}"
+        min="0" max="255" step="1" value="!b_c">
+        <input id='bi' value="!b_c" onkeyup="{
+        this.value = this.value.replace(/[^\d]/g,'')
+        if (parseInt(this.value) > -1 && parseInt(this.value) < 256)
+            b.value = this.value;
+            hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value));
+            datasend('monocolor', r.value+','+g.value+','+b.value);}"/>
+    </li>
+    <li>
+        <p style = "padding: 2px;margin:0">HEX:</p>
+        <input id='hex' oninput = "{
+            var rgb = hexToRgb(this.value)
+            if (rgb != null){
+                r.value = rgb['r']
+                ri.value = rgb['r']
+                g.value = rgb['g']
+                gi.value = rgb['g']
+                b.value = rgb['b']
+                bi.value = rgb['b']
+                datasend('monocolor', r.value+','+g.value+','+b.value);}}"/>
+    </li>
+    <li>
+        <p style = "padding: 2px;margin:0">LED(s):</p>
+        <input id='ledrange' oninput = "{
+            datasend('setleds', this.value);}"/>
+    </li>
+</ul>

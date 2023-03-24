@@ -1,0 +1,107 @@
+<style scoped onload="
+{hex.value='#';
+var hcolors = '!hc';
+var idbuttons = '!id_button_colors';
+id_buttons.value = idbuttons;
+hex_colors.value = hcolors;
+
+splitbuttons = idbuttons.split(',')
+splitcolors = hcolors.split(',')
+if (splitcolors.length > 1){
+    for (i=0; splitcolors.length-1>(i); i++)
+    {
+        rgb = hexToRgb(splitcolors[i]);
+        var newcolor = document.createElement('button');
+        var col = 'color:white;';
+        var contrast = ((rgb['r'] * 299) + (rgb['g'] * 587) + (rgb['b'] * 114)) / 1000
+        if (contrast > 128) col = 'color:black;';
+        q = id_buttons.value.split(',');
+        newcolor.innerHTML = splitcolors[i];
+        newcolor.id = splitbuttons[i];
+        newcolor.style = 'background-color:'+splitcolors[i]+';border: 2px solid'+splitcolors[i]+';'+col
+        click = function(){
+            this.parentElement.removeChild(this);
+            id_buttons.value = id_buttons.value.replace(this.id+',','');
+            hex_colors.value = hex_colors.value.replace(hex_colors.value.split(',')[parseInt(this.id)]+',','')
+            if (hex_colors.value.search(',') == -1) hex_colors.value = '';
+            datasend('updatecolor', hex_colors.value+'\\'+id_buttons.value);
+        }
+        newcolor.addEventListener('click',click);
+        colors.appendChild(newcolor);
+    }
+}}">
+.op {
+    display: block;
+    list-style-type: none;
+    list-style: none;
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 2px;
+    border: 2px solid gray;
+    border-radius: 10px
+}
+.op li{text-align: center; padding: 2px;}
+#delayinp{width:32px;}
+#hex{width:52px;}
+</style>
+<ul class = "op">
+    <li>Delay:
+        <input type="range" id='delay'
+        oninput="delayinp.value = this.value;"
+        ontouchend="{datasend('setdelay', ''+this.value); delayinp.value = this.value;}"
+        onMouseUp ="{datasend('setdelay', ''+this.value); delayinp.value = this.value;}"
+        min="1" max="500" step="1" value="!delay_change">
+        <input id='delayinp' value="!delay_change" onkeyup="{
+        this.value = this.value.replace(/[^\d]/g,'');
+        if (this.value > 0 && this.value < 501){
+            delay.value = this.value;
+            datasend('setdelay', ''+this.value);
+        }}"/>[ms]
+    </li>
+    <li>HEX color:
+        <input id="hex_colors" style="visibility: collapse; position:absolute;">
+        <input id="id_buttons" style="visibility: collapse; position:absolute;">
+        <input id='hex' value=""/>
+        <button onclick = "{
+            rgb = hexToRgb(hex.value)
+            if (rgb != null){
+                var newcolor = document.createElement('button');
+                var col = 'color:white;';
+                var contrast = ((rgb['r'] * 299) + (rgb['g'] * 587) + (rgb['b'] * 114)) / 1000
+                if (contrast > 128) col = 'color:black;';
+                q = id_buttons.value.split(',');
+                var n_id = '';
+                var count = 0;
+                while (true)
+                {
+                    n_id = count+'';
+                    miss = true;
+                    for (i = 0; q.length > i;i++)
+                    {
+                        if (q[i] === n_id) miss = false;
+                    }
+                    if (miss) break;
+                    count +=1;
+                }
+                id_buttons.value += n_id+',';
+                hex_colors.value += hex.value+',';
+                newcolor.innerHTML = hex.value;
+                newcolor.id = n_id;
+                newcolor.style = 'background-color:'+hex.value+';border: 2px solid'+hex.value+';'+col
+                click = function(){
+                    this.parentElement.removeChild(this);
+                    id_buttons.value = id_buttons.value.replace(this.id+',','');
+                    hex_colors.value = hex_colors.value.replace(hex_colors.value.split(',')[parseInt(this.id)]+',','')
+                    if (hex_colors.value.search(',') == -1) hex_colors.value = '';
+                    datasend('updatecolor', hex_colors.value+'\\'+id_buttons.value);
+                }
+                newcolor.addEventListener('click',click);
+                colors.appendChild(newcolor);
+                datasend('updatecolor', hex_colors.value+'\\'+id_buttons.value)
+        }}">Add color</button>
+    <button onclick="{datasend('updatecolor','\\');location.reload();}">Сlear all</button>
+    </li>
+    <li id=colors>Colors:
+    </li>
+</ul>

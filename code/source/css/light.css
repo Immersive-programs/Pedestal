@@ -1,0 +1,36 @@
+.nav
+{
+    position:absolute;
+    right: 0;
+    display: flex;
+    flex-warp: warp
+}
+
+#settings
+{
+    height:24px;
+    width:24px;
+}
+#home
+{
+    height:24px;
+    width:24px;
+}
+#mods, #status
+{
+    display: block;
+    list-style-type: none;
+    list-style: none;
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 2px;
+    background: #ccccff55;
+    border-radius: 10px
+}
+
+#mods li, #status li
+{
+    padding: 2px;
+    text-align: center;
+}

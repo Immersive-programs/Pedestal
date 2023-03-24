@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Settings</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/settings.css">
+    </head>
+    <body>
+        <button onclick="location.href = '/'" id='home'>H</button>
+        <div>
+            <ul class='box'>
+                General settings:
+                <!--<li class='profile'>Профиль:
+                    <ul style="padding-left: 0px;">
+                        <li>!g_profiles</li>
+                        <li>Новый:<input id='inp0'/><button>Добавить</button></li>
+                    </ul>
+                </li>-->
+                <li class='run'>Auto start on power up:
+                    <ul style="padding-left: 0px;">
+                        <li>Turn on backlight:<input id='ch0' type="checkbox" onchange=""></li>
+                        <li>Turn on rotation:<input id='ch1' type="checkbox" onchange=""></li>
+                    </ul>
+                </li>
+                <li class='network'>WIFI:
+                    <ul style="padding-left: 0px;">
+                        <li>Trying to connect to a wifi network:<input id='ch2' type="checkbox" onchange=""></li>
+                        <li>Network name:<input id='inp1'/></li>
+                        <li>Network password:<input id='inp2'/></li>
+                        <li>Access point:</li>
+                        <li>Access point password:<input id='inp3'/></li>
+                    </ul>
+                </li>
+                <li class='other'>Other:
+                    <ul style="padding-left: 0px;">
+                        <li>
+                            Device name:<input id='inp4'/>
+                        </li>
+                        <li>
+                            <button onclick="location.href = 'settings/light'">Backlight settings</button>
+                            <button onclick="location.href = 'settings/rotation'">Rotation settings</button>
+                        </li>
+                    </ul>
+                </li>
+                <li class='lang'>Language:
+                    <ul ul style="padding-left: 0px;">
+                        <li>
+                            <select id='selectlang'>
+                            </select>
+                        </li>
+                    </ul>
+                </li>
+                <li class='about'>Authors:
+                    <ul style="padding-left: 0px;">
+                        <li>Team: Immersive Electronics</li>
+                        <li>Idea author: Nikita</li>
+                        <li>Design and code author: Denis</li>
+                        <li><a href='https://github.com/Immersive-programs'>GitHub</a></li>
+                    </ul>
+                </li>
+                <li class='v'>
+                    <ul style="padding-left: 0px;">
+                        <li>Version:0.1</li>
+                    </ul>
+                </li>
+                <li class='save'><button onclick="{
+                    datasend('setsystemsettings', ch0.checked+','+ch1.checked+','+ch2.checked+','+inp1.value+','+inp2.value+','+inp3.value+','+inp4.value+','+selectlang.value);
+                }">Save</button></li>
+            </ul>
+        </div>
+    </body>
+
+
+<script type="text/javascript">
+function datasend(type,send)
+{
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/data");
+    xhr.setRequestHeader('New_Data', type+':'+ send +'|');
+    xhr.send('');
+}
+
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "/data");
+xhr.setRequestHeader('New_Data', 'getsystemsettings');
+xhr.onreadystatechange = () =>
+{
+    if (xhr.readyState === 4)
+    {
+        var getsplit = xhr.response.split(',');
+        ch0.checked = getsplit[0] == 'True';
+        ch1.checked = getsplit[1] == 'True';
+        ch2.checked = getsplit[6] == 'True';
+        inp1.value = getsplit[3];
+        inp2.value = getsplit[4];
+        inp3.value = getsplit[5];
+        inp4.value = getsplit[2];
+        
+        selected = getsplit[7]
+        splitlang = getsplit[8].split('\\')
+        for (var i=0; i < splitlang.length-1;i++){
+            sl = splitlang[i].split('*')
+            select = document.createElement('option');
+            select.innerHTML = sl[1]
+            select.value = sl[0]
+            if (sl[0] === selected)
+                select.selected="selected"
+            selectlang.appendChild(select);
+        }   
+    }
+};
+xhr.send();
+
+</script>

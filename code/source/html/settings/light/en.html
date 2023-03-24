@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Backlight settings</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/light.css">
+    </head>
+    <body>
+        <div class="nav">
+            <button onclick="location.href = '/settings'" id='settings'>S</button>
+            <button onclick="location.href = '/'" id='home'>H</button>
+        </div>
+            <div>Backlight settings:</div>
+        <div id='view' style="visibility: hidden;">
+            <div id='options'></div>
+            <ul id='status'><li>State:<button id='light' onclick = "lightchange()"></button></li></ul>
+            <ul id="mods">
+                <div>Working mode:</div>
+            </ul>
+        </div>
+    </body>
+
+<script type="text/javascript">
+var buttons = []
+
+var profiles = '!light_profiles'
+if (profiles !== '')
+{
+    splitprofiles = profiles.split(',');
+    for (i=0;splitprofiles.length-1 > i;i++)
+    {
+        var button = document.createElement('button');
+        button.innerHTML = splitprofiles[i];
+        button.id = i;
+        button.style = 'background-color:#bcbcbc;border: 2px solid gray; color:white'
+        click = function(){modchange(this.id)}
+        button.addEventListener('click',click);
+        buttons.push(button);
+        var li = document.createElement('li');
+        li.appendChild(button);
+        mods.appendChild(li);
+    }
+}
+
+var options = document.getElementById('options');
+var view = document.getElementById('view');
+
+function modchange(mode)
+{
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.response !== '')
+                options.innerHTML = xhr.response;
+            buttons[mode].style.backgroundColor = '#26ce00';
+            buttons[mode].style.border = '2px solid #1ea600';
+            view.style.visibility = 'visible'
+        }
+    }
+      xhr.open("GET", "/data");
+      xhr.setRequestHeader('New_Data', 'light_mode:'+ mode +'|');
+      xhr.send('');
+      view.style.visibility = 'hidden'
+      for (c=0; c < buttons.length; c++)
+      {
+           buttons[c].style.backgroundColor = '#bcbcbc';
+           buttons[c].style.color = '#ffffff';
+           buttons[c].style.border = '2px solid gray';
+      }
+}
+
+var light_status = '!light_status'
+light.style.color = 'white'
+if (light_status === 'False') {
+    light.innerHTML = 'Off';
+    light.style.backgroundColor = '#b1b1b1'
+    light.style.border = '2px solid #8f8f8f';
+}
+else {
+    light.innerHTML = 'On';
+    light.style.backgroundColor = '#26ce00';
+    light.style.border = '2px solid #1ea600';
+}
+
+function lightchange()
+{
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/data");
+    xhr.setRequestHeader('New_Data', 'light_status:' + (light_status == 'False') + '|');
+    xhr.onreadystatechange = () =>
+    {
+        if (xhr.readyState === 4)
+        {
+            if (light_status === 'True') {
+                light.innerHTML = 'Off';
+                light.style.backgroundColor = '#b1b1b1'
+                light.style.border = '2px solid #8f8f8f';
+                light_status = 'False'
+            }
+            else {
+                light.innerHTML = 'On';
+                light.style.backgroundColor = '#26ce00';
+                light.style.border = '2px solid #1ea600';
+                light_status = 'True'
+            }
+        }
+    };
+    xhr.send();
+}
+
+function datasend(type,send)
+{
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/data");
+    xhr.setRequestHeader('New_Data', 'light_set:'+ type +':'+ send +'|');
+    xhr.send('');
+}
+
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+
+modchange(!light_index)
+</script>
+</html>

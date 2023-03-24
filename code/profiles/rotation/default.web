@@ -1,0 +1,112 @@
+<style scoped onload="{
+    if ('!rotation_reverse' === 'True'){
+        reverse.style.backgroundColor = '#26ce00';
+        reverse.style.border = '2px solid #1ea600';}
+    if ('!steps' === '0') {step1.style = 'background-color:#26ce00; border:2px solid #1ea600';}
+    if ('!steps' === '1') {step2.style = 'background-color:#26ce00; border:2px solid #1ea600';}
+    if ('!steps' === '2') {step3.style = 'background-color:#26ce00; border:2px solid #1ea600';}
+    if ('!steps' === '3') {step4.style = 'background-color:#26ce00; border:2px solid #1ea600';}
+    if ('!steps' === '4') {step5.style = 'background-color:#26ce00; border:2px solid #1ea600';}
+    if ('!steps' === '5') {step6.style = 'background-color:#26ce00; border:2px solid #1ea600';}
+}">
+.op {
+    display: block;
+    list-style-type: none;
+    list-style: none;
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 2px;
+    border: 2px solid gray;
+    border-radius: 10px
+}
+.op li{text-align: center; padding: 2px;}
+.op button {
+    background-color:#bcbcbc;
+    color: #ffffff;
+    border: 2px solid gray;
+}
+#pwm_f {width:30px;}
+</style>
+<ul class = "op">
+    <li>Frequency:
+        <input type="range" id='pwm_rf'
+        oninput="pwm_f.value = this.value;"
+        ontouchend="{pwm_f.value = this.value; datasend('frequency', ''+this.value);}"
+        onMouseUp="{pwm_f.value = this.value; datasend('frequency', ''+this.value);}"
+        min="0" max="2000" step="1" value="!pwm_f">
+        <input id='pwm_f' value="!pwm_f" onkeyup="{
+                this.value = this.value.replace(/[^\d]/g,'')
+                if (parseInt(this.value) > 0 && parseInt(this.value) < 2000)
+                    pwm_rf.value = this.value;
+                    datasend('frequency', ''+this.value);}"/>
+        <input id="reverse_status" value="!rotation_reverse" style="visibility: collapse; position:absolute;">[Hz]
+        <button id='reverse' onclick="{
+            datasend('reverse', ''+reverse_status.value == 'False');
+            if (reverse_status.value == 'False'){
+                this.style.backgroundColor = '#26ce00';
+                this.style.border = '2px solid #1ea600';
+                reverse_status.value = 'True'}
+            else{
+                this.style.backgroundColor = '#bcbcbc';
+                this.style.border = '2px solid gray';
+                reverse_status.value = 'False'}
+        }">R</button>
+    </li>
+    <li>Step divider:
+        <button id='step1' onclick="{
+            this.style = 'background-color:#26ce00; border:2px solid #1ea600';
+            step2.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step3.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step4.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step5.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step6.style = 'background-color:#bcbcbc; border:2px solid gray';
+            datasend('divider', '0');
+        }">1</button>
+        <button id='step2' onclick="{
+            this.style = 'background-color:#26ce00; border:2px solid #1ea600';
+            step1.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step3.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step4.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step5.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step6.style = 'background-color:#bcbcbc; border:2px solid gray';
+            datasend('divider', '1');
+        }">1/2</button>
+        <button id='step3' onclick="{
+            this.style = 'background-color:#26ce00; border:2px solid #1ea600';
+            step1.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step2.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step4.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step5.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step6.style = 'background-color:#bcbcbc; border:2px solid gray';
+            datasend('divider', '2');
+        }">1/4</button>
+        <button id='step4' onclick="{
+            this.style = 'background-color:#26ce00; border:2px solid #1ea600';
+            step1.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step2.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step3.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step5.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step6.style = 'background-color:#bcbcbc; border:2px solid gray';
+            datasend('divider', '3');
+        }">1/8</button>
+        <button id='step5' onclick="{
+            this.style = 'background-color:#26ce00; border:2px solid #1ea600';
+            step1.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step2.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step3.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step4.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step6.style = 'background-color:#bcbcbc; border:2px solid gray';
+            datasend('divider', '4');
+        }">1/16</button>
+        <button id='step6' onclick="{
+            this.style = 'background-color:#26ce00; border:2px solid #1ea600';
+            step1.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step2.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step3.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step4.style = 'background-color:#bcbcbc; border:2px solid gray';
+            step5.style = 'background-color:#bcbcbc; border:2px solid gray';
+            datasend('divider', '5');
+        }">1/32</button>
+    </li>
+</ul>

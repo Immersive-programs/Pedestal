@@ -1,0 +1,152 @@
+<style scoped onload="{
+hex.value=rgbToHex(parseInt(!r_c),parseInt(!g_c),parseInt(!b_c));
+if ('!rotation_led_reverse' === 'True'){
+    reverse.style.backgroundColor = '#26ce00';
+    reverse.style.border = '2px solid #1ea600';}
+if ('!isenable' === 'True'){
+    enable.style.backgroundColor = '#26ce00';
+    enable.style.border = '2px solid #1ea600';}    
+}">
+.op {
+    display: block;
+    list-style-type: none;
+    list-style: none;
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 2px;
+    border: 2px solid gray;
+    border-radius: 10px
+}
+.op button {
+    background-color:#bcbcbc;
+    color: #ffffff;
+    border: 2px solid gray;
+}
+.op li{text-align: center;}
+#ri, #gi, #bi, #bleds ,#bdelay {width:30px;}
+#r, #g, #b, #leds ,#delay {width:50%;}
+#hex{width:30%;}
+</style>
+<ul class = "op">
+    <li>Color:</li>
+    <li>R:
+        <input type="range" id='r'
+        oninput="ri.value = this.value;"
+        ontouchend="{datasend('monocolor', r.value+','+g.value+','+b.value);
+                     hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value))
+                     ri.value = this.value;}"
+        onMouseUp="{datasend('monocolor', r.value+','+g.value+','+b.value);
+                    hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value))
+                    ri.value = this.value;}"
+        min="0" max="255" step="1" value="!r_c">
+        <input id='ri' value="!r_c" onkeyup="{
+        this.value = this.value.replace(/[^\d]/g,'')
+        if (parseInt(this.value) > -1 && parseInt(this.value) < 256)
+            r.value = this.value;
+            hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value));
+            datasend('monocolor', r.value+','+g.value+','+b.value);}"/>
+    </li>
+    <li>G:
+        <input type="range" id='g'
+        oninput="gi.value = this.value;"
+        ontouchend="{datasend('monocolor', r.value+','+g.value+','+b.value);
+                     hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value))
+                     gi.value = this.value;}"
+        onMouseUp="{datasend('monocolor', r.value+','+g.value+','+b.value);
+                    hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value))
+                    gi.value = this.value;}"
+        min="0" max="255" step="1" value="!g_c">
+        <input id='gi' value="!g_c" onkeyup="{
+        this.value = this.value.replace(/[^\d]/g,'')
+        if (parseInt(this.value) > -1 && parseInt(this.value) < 256)
+            g.value = this.value;
+            hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value));
+            datasend('monocolor', r.value+','+g.value+','+b.value);}"/>
+    </li>
+    <li>B:
+        <input type="range" id='b'
+        oninput="bi.value = this.value;"
+        ontouchend="{datasend('monocolor', r.value+','+g.value+','+b.value);
+                     hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value))
+                     bi.value = this.value;}"
+        onMouseUp="{datasend('monocolor', r.value+','+g.value+','+b.value);
+                    hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value))
+                    bi.value = this.value;}"
+        min="0" max="255" step="1" value="!b_c">
+        <input id='bi' value="!b_c" onkeyup="{
+        this.value = this.value.replace(/[^\d]/g,'')
+        if (parseInt(this.value) > -1 && parseInt(this.value) < 256)
+            b.value = this.value;
+            hex.value = rgbToHex(parseInt(r.value),parseInt(g.value),parseInt(b.value));
+            datasend('monocolor', r.value+','+g.value+','+b.value);}"/>
+    </li>
+    <li>
+        <p style = "padding: 2px;margin:0">HEX:</p>
+        <input id='hex' oninput = "{
+            var rgb = hexToRgb(this.value)
+            if (rgb != null){
+                r.value = rgb['r']
+                ri.value = rgb['r']
+                g.value = rgb['g']
+                gi.value = rgb['g']
+                b.value = rgb['b']
+                bi.value = rgb['b']
+                datasend('monocolor', r.value+','+g.value+','+b.value);}}"/>
+    </li>
+    <li>LEDs:
+        <input type="range" id='leds'
+        oninput="bleds.value = this.value;"
+        ontouchend="{datasend('leds', this.value+'');
+                     bleds.value = this.value;}"
+        onMouseUp="{datasend('leds', this.value+'');
+                    bleds.value = this.value;}"
+        min="0" max="!np_leds" step="1" value="!leds_selected">
+        <input id='bleds' value="!leds_selected" onkeyup="{
+        this.value = this.value.replace(/[^\d]/g,'')
+        if (parseInt(this.value) > -1 && parseInt(this.value) < !np_leds+1)
+            leds.value = this.value;
+            datasend('leds', this.value);}"/>
+    </li>
+    <li>Rotation:
+        <input id="enable_status" value="!isenable" style="visibility: collapse; position:absolute;">
+        <button id='enable' onclick="{
+                datasend('isenable', ''+enable_status.value == 'False');
+                if (enable_status.value == 'False'){
+                    this.style.backgroundColor = '#26ce00';
+                    this.style.border = '2px solid #1ea600';
+                    enable_status.value = 'True'}
+                else{
+                    this.style.backgroundColor = '#bcbcbc';
+                    this.style.border = '2px solid gray';
+                    enable_status.value = 'False'}
+            }">Enable</button>
+        
+        <input id="reverse_status" value="!rotation_led_reverse" style="visibility: collapse; position:absolute;">
+        <button id='reverse' onclick="{
+                datasend('led_reverse', ''+reverse_status.value == 'False');
+                if (reverse_status.value == 'False'){
+                    this.style.backgroundColor = '#26ce00';
+                    this.style.border = '2px solid #1ea600';
+                    reverse_status.value = 'True'}
+                else{
+                    this.style.backgroundColor = '#bcbcbc';
+                    this.style.border = '2px solid gray';
+                    reverse_status.value = 'False'}
+            }">Reverse</button>
+    </li>
+        <li>Delay:
+        <input type="range" id='delay'
+        oninput="bdelay.value = this.value;"
+        ontouchend="{datasend('delay', this.value+'');
+                     bdelay.value = this.value;}"
+        onMouseUp="{datasend('delay', this.value+'');
+                    bdelay.value = this.value;}"
+        min="0" max="500" step="1" value="!delay_change">
+        <input id='bdelay' value="!delay_change" onkeyup="{
+        this.value = this.value.replace(/[^\d]/g,'')
+        if (parseInt(this.value) > -1 && parseInt(this.value) < 501)
+            delay.value = this.value;
+            datasend('delay', this.value);}"/>[ms]
+    </li>
+</ul>

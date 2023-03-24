@@ -1,0 +1,47 @@
+body
+{
+    margin: 0;
+    padding: 0;
+}
+ul
+{
+    list-style-type: none;
+    list-style: none;
+    margin:0
+    padding:0
+}
+.box
+{
+    display: block;
+    list-style-type: none;
+    list-style: none;
+    margin-top: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 2px;
+    border: 2px solid gray;
+    border-radius: 10px
+}
+.profile, .run, .network, .other, .debug, .about, .v, .lang
+{
+    text-align: center;
+    padding: 2px;
+    list-style-type: none;
+    list-style: none;
+    /*margin-top: 5px;
+    margin-left: 5%;
+    margin-right: 5%;*/
+    border: 2px solid gray;
+    border-radius: 10px
+}
+#inp0, #inp1, #inp2, #inp3, #inp4
+{
+    width:30%;
+}
+.save
+{
+    text-align: center;
+    padding: 2px;
+    list-style-type: none;
+    list-style: none;
+}

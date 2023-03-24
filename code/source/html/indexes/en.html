@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Control</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/index.css">
+    </head>
+    <body>
+        <div id='head'>Stand control</div>
+        <div class='options'>
+            <button id='light' onclick = "lightchange()">
+                <div>Backlight</div>
+                <div id='light_status'></div>
+                <div id='light_mode'></div>
+            </button>
+            <button id='rotation' onclick = 'rotationchange()'>
+                <div>Table</div>
+                <div id='rotation_status'></div>
+                <div id='rotation_mode'></div>
+            </button>
+        </div>
+        <button onclick="location.href = 'settings'"; id='settings'>Settings</button>
+    </body>
+
+<script type="text/javascript">
+        var ls = document.getElementById('light_status');
+        var ms = document.getElementById('rotation_status');
+        var lm = document.getElementById('light_mode');
+        var mm = document.getElementById('rotation_mode');
+        var light_status = '!light_status'
+        var rotation_status = '!rotation_status'
+
+        var light = document.getElementById('light');
+        var rotation = document.getElementById('rotation');
+
+        if (light_status === 'True')
+        {
+            ls.innerHTML = 'Status:On';
+            light.style.backgroundColor = '#26ce00';
+            light.style.border = '2px solid #1ea600';
+        }
+        else {ls.innerHTML = 'Status:Off'}
+        if (rotation_status === 'True')
+        {
+            ms.innerHTML = 'Status:Off'
+            rotation.style.backgroundColor = '#26ce00';
+            rotation.style.border = '2px solid #1ea600';
+        }
+        else {ms.innerHTML = 'Status:Off'}
+
+        lm.innerHTML = 'Режим:!light_mode';
+        mm.innerHTML = 'Режим:!rotation_mode';
+
+        function lightchange()
+        {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/data");
+            xhr.setRequestHeader('New_Data', 'light_status:' + (light_status == 'False') + '|');
+            xhr.onreadystatechange = () =>
+            {
+                if (xhr.readyState === 4)
+                {
+                    if (light_status === 'True') {
+                        ls.innerHTML = 'Status:Off';
+                        light_status = 'False';
+                        light.style.backgroundColor = '#b1b1b1'
+                        light.style.border = '2px solid #8f8f8f';
+                    }
+                    else {
+                        ls.innerHTML = 'Status:On';
+                        light_status = 'True';
+                        light.style.backgroundColor = '#26ce00';
+                        light.style.border = '2px solid #1ea600';
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        function rotationchange()
+        {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/data");
+            xhr.setRequestHeader('New_Data', 'rotation_status:' + (rotation_status == 'False') + '|');
+            xhr.onreadystatechange = () =>
+            {
+                if (xhr.readyState === 4)
+                {
+                    if (rotation_status === 'True') {
+                        ms.innerHTML = 'Status:Off';
+                        rotation_status = 'False';
+                        rotation.style.backgroundColor = '#b1b1b1'
+                        rotation.style.border = '2px solid #8f8f8f';
+                    }
+                    else {
+                        ms.innerHTML = 'Status:On';
+                        rotation_status = 'True';
+                        rotation.style.backgroundColor = '#26ce00';
+                        rotation.style.border = '2px solid #1ea600';
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+</script>
+</html>

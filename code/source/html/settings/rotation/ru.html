@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Настройки вращения</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/light.css">
+    </head>
+    <body>
+        <div class="nav">
+            <button onclick="location.href = '/settings'" id='settings'>S</button>
+            <button onclick="location.href = '/'" id='home'>H</button>
+        </div>
+            <div>Настройки вращения:</div>
+        <div id='view' style="visibility: hidden;">
+            <div id='options'></div>
+            <ul id='status'><li>Состояние:<button id='rotation' onclick = "rotationchange()"></button></li></ul>
+            <ul id="mods">
+                <div>Режим работы:</div>
+            </ul>
+        </div>
+    </body>
+
+<script type="text/javascript">
+var buttons = []
+
+var profiles = '!rotation_profiles'
+if (profiles !== '')
+{
+    splitprofiles = profiles.split(',');
+    for (i=0;splitprofiles.length-1 > i;i++)
+    {
+        var button = document.createElement('button');
+        button.innerHTML = splitprofiles[i];
+        button.id = i;
+        button.style = 'background-color:#bcbcbc;border: 2px solid gray; color:white'
+        click = function(){modchange(this.id)}
+        button.addEventListener('click',click);
+        buttons.push(button);
+        var li = document.createElement('li');
+        li.appendChild(button);
+        mods.appendChild(li);
+    }
+}
+
+var options = document.getElementById('options');
+var view = document.getElementById('view');
+
+function modchange(mode)
+{
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.response !== '')
+                options.innerHTML = xhr.response;
+            buttons[mode].style.backgroundColor = '#26ce00';
+            buttons[mode].style.border = '2px solid #1ea600';
+            view.style.visibility = 'visible'
+        }
+    }
+      xhr.open("GET", "/data");
+      xhr.setRequestHeader('New_Data', 'rotation_mode:'+ mode +'|');
+      xhr.send('');
+      view.style.visibility = 'hidden'
+      for (c=0; c < buttons.length; c++)
+      {
+           buttons[c].style.backgroundColor = '#bcbcbc';
+           buttons[c].style.color = '#ffffff';
+           buttons[c].style.border = '2px solid gray';
+      }
+}
+
+function datasend(type,send)
+{
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/data");
+    xhr.setRequestHeader('New_Data', 'rotation_set:'+ type +':'+ send +'|');
+    xhr.send('');
+}
+
+var rotation_status = '!rotation_status'
+if (rotation_status === 'False') {
+    rotation.innerHTML = 'Выключёно';
+    rotation.style.backgroundColor = '#b1b1b1'
+    rotation.style.border = '2px solid #8f8f8f';
+}
+else {
+    rotation.innerHTML = 'Включёно';
+    rotation.style.backgroundColor = '#26ce00';
+    rotation.style.border = '2px solid #1ea600';
+}
+function rotationchange()
+{
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/data");
+    xhr.setRequestHeader('New_Data', 'rotation_status:' + (rotation_status == 'False') + '|');
+    xhr.onreadystatechange = () =>
+    {
+        if (xhr.readyState === 4)
+        {
+            if (rotation_status === 'True') {
+                rotation.innerHTML = 'Выключёно';
+                rotation_status = 'False';
+                rotation.style.backgroundColor = '#b1b1b1'
+                rotation.style.border = '2px solid #8f8f8f';
+            }
+            else {
+                rotation.innerHTML = 'Включёно';
+                rotation_status = 'True';
+                rotation.style.backgroundColor = '#26ce00';
+                rotation.style.border = '2px solid #1ea600';
+            }
+        }
+    };
+    xhr.send();
+}
+
+modchange(!rotation_index)
+</script>
+</html>
