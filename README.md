@@ -13,28 +13,23 @@ Video on YouTube: https://youtu.be/cd8HgQr4loQ
   <summary> <b></b> (<i>click to expand</i>)</summary>
 
   #### Backlight operation modes:
-  - One color;
-  <details><summary> <b></b> (<i>click to expand</i>)</summary>
+  <details><summary> <b>One color</b> (<i>click to expand</i>)</summary>
   
   ![один цвет](https://user-images.githubusercontent.com/80697141/227638143-9e3a5081-f24a-4871-b809-0f7fe94cda16.png) 
   </details>
-  - Graduation;
-  <details><summary> <b></b> (<i>click to expand</i>)</summary>
+  <details><summary> <b>Graduation;</b> (<i>click to expand</i>)</summary>
   
   ![градация](https://user-images.githubusercontent.com/80697141/227640291-9695e472-f2fd-4e54-ad62-7f6b8ba20df6.png)
   </details>
-  - Random;
-  <details><summary> <b></b> (<i>click to expand</i>)</summary>
+  <details><summary> <b>Random;</b> (<i>click to expand</i>)</summary>
   
   ![рандом](https://user-images.githubusercontent.com/80697141/227641280-4c4ee593-9d20-4e6e-aa0d-7509cc02f024.png)
   </details>
-  - Manual;
-  <details><summary> <b></b> (<i>click to expand</i>)</summary>
+  <details><summary> <b>Manual;</b> (<i>click to expand</i>)</summary>
   
   ![ручной](https://user-images.githubusercontent.com/80697141/227641600-be39dd3a-42d3-4816-aaf4-b3ddf798cf71.png)
   </details>
-  - Train;
-  <details><summary> <b></b> (<i>click to expand</i>)</summary>
+  <details><summary> <b>Train;</b> (<i>click to expand</i>)</summary>
   
   ![поезд](https://user-images.githubusercontent.com/80697141/227641842-4468060a-e50c-4ac6-98ae-4e1ca0ce065f.png)
   </details>
@@ -76,6 +71,17 @@ Video on YouTube: https://youtu.be/cd8HgQr4loQ
   </details>
 </details>
 
+<details>
+  <summary> <b>Connecting via the browser</b> (<i>нажмите, чтобы развернуть</i>)</summary>
+  
+  ### Stand behavior:
+  - Default: network name:Pedestal password:9876543210);
+  - If the network name and password are not specified, the stand will create its own access point;
+  - If the password does not match your network, an access point will also be created.
+  
+  ####  When connecting via the access point of the stand itself, it is necessary to go to this IP address:192.168.4.1
+</details>
+
 ### Used libraries:
 - Hugo kernel:
   - micropython-nanoweb: https://github.com/hugokernel/micropython-nanoweb
@@ -105,28 +111,23 @@ Video on YouTube: https://youtu.be/cd8HgQr4loQ
   <summary> <b></b> (<i>нажмите, чтобы развернуть</i>)</summary>
 
   #### Режимы работы подсветки:
-  - One color - Определённый цвет;
-  <details><summary> <b></b> (<i>нажмите, чтобы развернуть</i>)</summary>
+  <details><summary> <b>One color - Определённый цвет;</b> (<i>нажмите, чтобы развернуть</i>)</summary>
   
   ![один цвет](https://user-images.githubusercontent.com/80697141/227638143-9e3a5081-f24a-4871-b809-0f7fe94cda16.png) 
   </details>
-  - Graduation - Градация;
-  <details><summary> <b></b> (<i>нажмите, чтобы развернуть</i>)</summary>
+  <details><summary> <b>Graduation - Градация;</b> (<i>нажмите, чтобы развернуть</i>)</summary>
   
   ![градация](https://user-images.githubusercontent.com/80697141/227640291-9695e472-f2fd-4e54-ad62-7f6b8ba20df6.png)
   </details>
-  - Random - Рандомные светодиоды;
-  <details><summary> <b></b> (<i>нажмите, чтобы развернуть</i>)</summary>
+  <details><summary> <b>Random - Рандомные светодиоды;</b> (<i>нажмите, чтобы развернуть</i>)</summary>
   
   ![рандом](https://user-images.githubusercontent.com/80697141/227641280-4c4ee593-9d20-4e6e-aa0d-7509cc02f024.png)
   </details>
-  - Manual - Ручной;
-  <details><summary> <b></b> (<i>нажмите, чтобы развернуть</i>)</summary>
+  <details><summary> <b> Manual - Ручной;</b> (<i>нажмите, чтобы развернуть</i>)</summary>
   
   ![ручной](https://user-images.githubusercontent.com/80697141/227641600-be39dd3a-42d3-4816-aaf4-b3ddf798cf71.png)
   </details>
-  - Train - Поезд;
-  <details><summary> <b></b> (<i>нажмите, чтобы развернуть</i>)</summary>
+  <details><summary> <b>Train - Поезд;</b> (<i>нажмите, чтобы развернуть</i>)</summary>
   
   ![поезд](https://user-images.githubusercontent.com/80697141/227641842-4468060a-e50c-4ac6-98ae-4e1ca0ce065f.png)
   </details>
@@ -164,6 +165,17 @@ Video on YouTube: https://youtu.be/cd8HgQr4loQ
   
   soon
   </details>
+</details>
+
+<details>
+  <summary> <b>Подключение через браузер</b> (<i>нажмите, чтобы развернуть</i>)</summary>
+  
+  ### Поведение подставки:
+  - По умолчанию: имя сети:Pedestal пароль:9876543210);
+  - Если не задано название сети и пароль подставка создаст свою точку доступа;
+  - Если пароль не подходит к вашей сети также будет создана точка доступа.
+  
+  #### При подключении через точку доступа самой подставки необходимо перейти по данному IP адресу:192.168.4.1
 </details>
 
 ### Используемые библиотеки:
