@@ -73,12 +73,12 @@ function modchange(mode)
 var light_status = '!light_status'
 light.style.color = 'white'
 if (light_status === 'False') {
-    light.innerHTML = 'Выключёно';
+    light.innerHTML = 'Выключено';
     light.style.backgroundColor = '#b1b1b1'
     light.style.border = '2px solid #8f8f8f';
 }
 else {
-    light.innerHTML = 'Включёно';
+    light.innerHTML = 'Включено';
     light.style.backgroundColor = '#26ce00';
     light.style.border = '2px solid #1ea600';
 }
@@ -93,13 +93,13 @@ function lightchange()
         if (xhr.readyState === 4)
         {
             if (light_status === 'True') {
-                light.innerHTML = 'Выключёно';
+                light.innerHTML = 'Выключено';
                 light.style.backgroundColor = '#b1b1b1'
                 light.style.border = '2px solid #8f8f8f';
                 light_status = 'False'
             }
             else {
-                light.innerHTML = 'Включёно';
+                light.innerHTML = 'Включено';
                 light.style.backgroundColor = '#26ce00';
                 light.style.border = '2px solid #1ea600';
                 light_status = 'True'
