@@ -80,12 +80,12 @@ function datasend(type,send)
 
 var rotation_status = '!rotation_status'
 if (rotation_status === 'False') {
-    rotation.innerHTML = 'Выключёно';
+    rotation.innerHTML = 'Выключeно';
     rotation.style.backgroundColor = '#b1b1b1'
     rotation.style.border = '2px solid #8f8f8f';
 }
 else {
-    rotation.innerHTML = 'Включёно';
+    rotation.innerHTML = 'Включeно';
     rotation.style.backgroundColor = '#26ce00';
     rotation.style.border = '2px solid #1ea600';
 }
@@ -99,13 +99,13 @@ function rotationchange()
         if (xhr.readyState === 4)
         {
             if (rotation_status === 'True') {
-                rotation.innerHTML = 'Выключёно';
+                rotation.innerHTML = 'Выключeно';
                 rotation_status = 'False';
                 rotation.style.backgroundColor = '#b1b1b1'
                 rotation.style.border = '2px solid #8f8f8f';
             }
             else {
-                rotation.innerHTML = 'Включёно';
+                rotation.innerHTML = 'Включeно';
                 rotation_status = 'True';
                 rotation.style.backgroundColor = '#26ce00';
                 rotation.style.border = '2px solid #1ea600';
