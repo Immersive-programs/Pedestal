@@ -43,7 +43,7 @@
         else {ls.innerHTML = 'Состояние:Выключёно'}
         if (rotation_status === 'True')
         {
-            ms.innerHTML = 'Состояние:Включёно'
+            ms.innerHTML = 'Состояние:Включено'
             rotation.style.backgroundColor = '#26ce00';
             rotation.style.border = '2px solid #1ea600';
         }
@@ -62,13 +62,13 @@
                 if (xhr.readyState === 4)
                 {
                     if (light_status === 'True') {
-                        ls.innerHTML = 'Состояние:Выключёно';
+                        ls.innerHTML = 'Состояние:Выключено';
                         light_status = 'False';
                         light.style.backgroundColor = '#b1b1b1'
                         light.style.border = '2px solid #8f8f8f';
                     }
                     else {
-                        ls.innerHTML = 'Состояние:Включёно';
+                        ls.innerHTML = 'Состояние:Включено';
                         light_status = 'True';
                         light.style.backgroundColor = '#26ce00';
                         light.style.border = '2px solid #1ea600';
@@ -88,13 +88,13 @@
                 if (xhr.readyState === 4)
                 {
                     if (rotation_status === 'True') {
-                        ms.innerHTML = 'Состояние:Выключёно';
+                        ms.innerHTML = 'Состояние:Выключено';
                         rotation_status = 'False';
                         rotation.style.backgroundColor = '#b1b1b1'
                         rotation.style.border = '2px solid #8f8f8f';
                     }
                     else {
-                        ms.innerHTML = 'Состояние:Включёно';
+                        ms.innerHTML = 'Состояние:Включено';
                         rotation_status = 'True';
                         rotation.style.backgroundColor = '#26ce00';
                         rotation.style.border = '2px solid #1ea600';
